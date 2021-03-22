@@ -8,7 +8,7 @@ String registerNewUrl(String longUrl)
     
        // function to generate a random string of length n 
     int n=9;
-    
+       
   
         // chose a Character random from this String 
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -32,9 +32,11 @@ String registerNewUrl(String longUrl)
         } 
         String ans = sb.toString();
         String f = "http://short.url/" + ans;
+
+        map.put(id++,f);
   
         return f; 
 }
 
 
-//String registerNewUrl(String longUrl, String shortUrl)
+String registerNewUrl(String longUrl, String shortUrl)
