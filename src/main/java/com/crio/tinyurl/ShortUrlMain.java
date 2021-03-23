@@ -1,11 +1,14 @@
-package com.crio.shorturl;
+package com.crio.tinyurl;
+import com.crio.tinyurl.*;
+import com.crio.shorturl.*;
+//import java.util.*;
 
 public class ShortUrlMain {
 
   public static void main(String[] args) {
 
-    ShortUrl shortUrl = new ShortUrlImpl();
-
+    ShortUrl shortUrl =   new ShortUrlImpl();
+    
     // Test the Short Url Implementation by registering long URLs and looking up short URLs
     
     // Register long URLs and get the corresponding short URLs as return values

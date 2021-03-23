@@ -1,14 +1,16 @@
 package com.crio.shorturl;
+ 
+
 import java.util.*;
 
 public interface ShortUrl {
-
+ 
   // If longUrl already has a corresponding shortUrl, return that shortUrl
   // If longUrl is new, create a new shortUrl for the longUrl and return it
   String registerNewUrl(String longUrl);
 
-  HashMap<Integer,String> map=new HashMap<Integer,String>();
-  int id = 0;
+
+  
   // If shortUrl is already present, return null
   // Else, register the specified shortUrl for the given longUrl
   // Note: You don't need to validate if longUrl is already present, 

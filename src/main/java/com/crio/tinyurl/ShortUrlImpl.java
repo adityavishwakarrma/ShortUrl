@@ -1,15 +1,27 @@
-package com.crio.shorturl;
+package com.crio.tinyurl;
 
 import java.util.*;
-import java.lang.Math.*;
+//import java.util.Random;
+import java.util.Map.Entry;
+//import java.lang.Math.*;
 
-String registerNewUrl(String longUrl)
-{
-    
-       // function to generate a random string of length n 
+import com.crio.shorturl.ShortUrl;
+
+public class ShortUrlImpl implements ShortUrl {
+
+    HashMap<String,String> map=new HashMap<String,String>();
+
+@Override
+public String registerNewUrl(String longUrl)
+{   
+    if(map.containsKey(longUrl))
+    {
+        return map.get(longUrl);
+    }
+
+ // function to generate a random string of length n 
     int n=9;
-       
-  
+
         // chose a Character random from this String 
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                     + "0123456789"
@@ -23,20 +35,63 @@ String registerNewUrl(String longUrl)
             // generate a random number between 
             // 0 to AlphaNumericString variable length 
             int index 
-                = (int)(AlphaNumericString.length() 
-                        * Math.random()); 
+                = (int)( AlphaNumericString.length() * Math.random() ); 
   
             // add Character one by one in end of sb 
-            sb.append(AlphaNumericString 
-                          .charAt(index)); 
+            sb.append(AlphaNumericString.charAt(index)); 
         } 
         String ans = sb.toString();
         String f = "http://short.url/" + ans;
 
-        map.put(id++,f);
+        map.put(longUrl,f);
   
         return f; 
 }
 
+int c=0;
 
-String registerNewUrl(String longUrl, String shortUrl)
+@Override
+public String getUrl(String shortUrl)
+{
+    String a=null;
+
+   for(Entry<String, String> entry : map.entrySet() )
+   {
+       if( entry.getValue() == shortUrl )
+        {
+            a = entry.getKey();
+            c++;
+        }  
+
+   }
+
+    return a;
+}
+
+@Override
+public String delete(String longUrl) {
+    return map.remove(longUrl);
+}
+
+@Override
+public String registerNewUrl(String longUrl, String shortUrl) {
+    if ( getUrl(shortUrl) == null )
+    return null;
+    else {
+        map.put(longUrl,shortUrl);
+        return shortUrl;
+    }
+}
+
+@Override
+public Integer getHitCount(String longUrl) {
+    // TODO Auto-generated method stub
+
+    return c;
+}
+
+
+
+}
+
+ 
