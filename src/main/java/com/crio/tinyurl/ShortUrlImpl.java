@@ -85,8 +85,6 @@ public String registerNewUrl(String longUrl, String shortUrl) {
 
 @Override
 public Integer getHitCount(String longUrl) {
-    // TODO Auto-generated method stub
-
     return c;
 }
 

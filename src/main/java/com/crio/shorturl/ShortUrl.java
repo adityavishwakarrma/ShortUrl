@@ -1,7 +1,7 @@
 package com.crio.shorturl;
  
 
-import java.util.*;
+//import java.util.*;
 
 public interface ShortUrl {
  
