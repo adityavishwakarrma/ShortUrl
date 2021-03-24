@@ -1,4 +1,4 @@
-package com.crio.tinyurl;
+package com.crio.shorturl;
 
 import java.util.*;
 //import java.util.Random;
@@ -53,7 +53,7 @@ int c=0;
 @Override
 public String getUrl(String shortUrl)
 {
-    String a=null;
+    String a=new String();
 
    for(Entry<String, String> entry : map.entrySet() )
    {

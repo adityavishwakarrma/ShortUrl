@@ -1,4 +1,4 @@
-package com.crio.tinyurl;
+package com.crio.shorturl;
 
 public class ShortUrlMain {
 
