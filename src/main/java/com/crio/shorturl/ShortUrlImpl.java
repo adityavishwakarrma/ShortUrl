@@ -8,15 +8,21 @@ import java.util.Map.Entry;
 //import com.crio.shorturl.*;
 
 public class ShortUrlImpl implements ShortUrl {
+                                        // longUrl  shortUrl
+    HashMap<String,String> map1=new HashMap<String,String>();
+                                        // shortUrl longUrl
+    HashMap<String,String> map2=new HashMap<String,String>();
 
-    HashMap<String,String> map=new HashMap<String,String>();
+    int c=0;
+    HashMap<String,Integer> map3=new HashMap<String,Integer>();
 
 @Override
 public String registerNewUrl(String longUrl)
 {   
-    if(map.containsKey(longUrl))
-    {
-        return map.get(longUrl);
+    if(map1.containsKey(longUrl))
+    {   
+        
+        return map1.get(longUrl);
     }
 
  // function to generate a random string of length n 
@@ -43,24 +49,23 @@ public String registerNewUrl(String longUrl)
         String ans = sb.toString();
         String f = "http://short.url/" + ans;
 
-        map.put(longUrl,f);
+        map1.put(longUrl,f);
+        map2.put(f, longUrl);
   
         return f; 
 }
 
-int c=0;
+
 
 @Override
 public String getUrl(String shortUrl)
 {
-    String a=new String();
-
-   for(Entry<String, String> entry : map.entrySet() )
+    String a = new String();
+   for(Entry<String, String> entry : map1.entrySet() )
    {
        if( entry.getValue() == shortUrl )
         {
             a = entry.getKey();
-            c++;
         }  
 
    }
@@ -70,21 +75,38 @@ public String getUrl(String shortUrl)
 
 @Override
 public String delete(String longUrl) {
-    return map.remove(longUrl);
+    map2.remove(registerNewUrl(longUrl));
+    return map1.remove(longUrl);
 }
+
+ 
 
 @Override
 public String registerNewUrl(String longUrl, String shortUrl) {
+    
     if ( getUrl(shortUrl) == null )
     return null;
     else {
-        map.put(longUrl,shortUrl);
+        map1.put(longUrl,shortUrl);
+        map2.put(shortUrl, longUrl);
         return shortUrl;
     }
 }
 
+
 @Override
 public Integer getHitCount(String longUrl) {
+
+    int c=0;
+
+    for(Entry<String, String> entry : map2.entrySet() )
+    {
+        if( entry.getValue() == longUrl )
+         {
+            break;
+         }  
+         c++;
+    }
     return c;
 }
 
