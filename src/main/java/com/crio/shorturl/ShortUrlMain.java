@@ -49,8 +49,8 @@ public class ShortUrlMain {
     assert (choppedUrl.length() == 9);
 
     // Delete mapping for the long URL and confirm that the short URL lookup for that long URL returns null
-    shortUrl.delete("http://abc6.com");
-    assert(shortUrl.getUrl(url6) == null);  
+   shortUrl.delete("http://abc6.com");
+   assert(shortUrl.getUrl(url6) == null);  
   }
 }
 

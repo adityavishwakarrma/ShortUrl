@@ -1,26 +1,25 @@
 package com.crio.shorturl;
 
-import java.util.*;
-//import java.util.Random;
+import java.util.HashMap;
 import java.util.Map.Entry;
-//import java.lang.Math.*;
-
-//import com.crio.shorturl.*;
-
+ 
 public class ShortUrlImpl implements ShortUrl {
                                         // longUrl  shortUrl
     HashMap<String,String> map1=new HashMap<String,String>();
-                                        // shortUrl longUrl
-    HashMap<String,String> map2=new HashMap<String,String>();
-
-    
+   
+    HashMap<String,Integer> map2 = new HashMap<String,Integer>();
 
 @Override
 public String registerNewUrl(String longUrl)
 {   
     if(map1.containsKey(longUrl))
     {   
-        
+        for(Entry<String, Integer> entry : map2.entrySet())
+        {
+            if(entry.getKey()==longUrl)
+            map2.put(longUrl, entry.getValue()+1) ;
+        }
+
         return map1.get(longUrl);
     }
 
@@ -40,18 +39,19 @@ public String registerNewUrl(String longUrl)
             // generate a random number between 
             // 0 to AlphaNumericString variable length 
             int index 
-                = (int)( AlphaNumericString.length() * Math.random() ); 
+                = (int)( AlphaNumericString.length() * java.lang.Math.random() ); 
   
             // add Character one by one in end of sb 
             sb.append(AlphaNumericString.charAt(index)); 
         } 
-        String ans = sb.toString();
-        String f = "http://short.url/" + ans;
 
-        map1.put(longUrl,f);
-        map2.put(f, longUrl);
+        String shortUrl = "http://short.url/" + sb.toString();
+
+        map1.put(longUrl,shortUrl);
+        
+        map2.put(longUrl, 1);
   
-        return f; 
+        return shortUrl; 
 }
 
 
@@ -66,15 +66,12 @@ public String getUrl(String shortUrl)
         {
             a = entry.getKey();
         }  
-
    }
-
     return a;
 }
 
 @Override
 public String delete(String longUrl) {
-    map2.remove(registerNewUrl(longUrl));
     return map1.remove(longUrl);
 }
 
@@ -82,31 +79,20 @@ public String delete(String longUrl) {
 
 @Override
 public String registerNewUrl(String longUrl, String shortUrl) {
-    
-    if ( getUrl(shortUrl) == null )
-    return null;
-    else {
+        if(map1.containsValue(shortUrl))
+        {
+            return null;
+        }
+       
         map1.put(longUrl,shortUrl);
-        map2.put(shortUrl, longUrl);
+        
         return shortUrl;
-    }
 }
 
 
 @Override
 public Integer getHitCount(String longUrl) {
-
-    int c=0;
-
-    for(Entry<String, String> entry : map2.entrySet() )
-    {
-        if( entry.getValue() == longUrl )
-         {
-            break;
-         }  
-         c++;
-    }
-    return c;
+    return map2.get(longUrl);
 }
 
 
