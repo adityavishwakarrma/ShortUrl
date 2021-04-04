@@ -59,7 +59,7 @@ public String registerNewUrl(String longUrl)
 @Override
 public String getUrl(String shortUrl)
 {
-    String a = new String();
+    String a = null;
    for(Entry<String, String> entry : map1.entrySet() )
    {
        if( entry.getValue() == shortUrl )
@@ -92,7 +92,9 @@ public String registerNewUrl(String longUrl, String shortUrl) {
 
 @Override
 public Integer getHitCount(String longUrl) {
+    if(map2.containsKey(longUrl))
     return map2.get(longUrl);
+    else return 0;
 }
 
 
