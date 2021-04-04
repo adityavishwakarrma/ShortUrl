@@ -13,8 +13,7 @@ public class ShortUrlImpl implements ShortUrl {
                                         // shortUrl longUrl
     HashMap<String,String> map2=new HashMap<String,String>();
 
-    int c=0;
-    HashMap<String,Integer> map3=new HashMap<String,Integer>();
+    
 
 @Override
 public String registerNewUrl(String longUrl)
